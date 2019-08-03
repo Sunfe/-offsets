@@ -29,10 +29,12 @@ UI_DIR = build
 SOURCES += \
         src/main.cpp \
         src/offsets.cpp \
+        src/profile.cpp \
         src/setting.cpp
 
 HEADERS += \
         src/offsets.h \
+        src/profile.h \
         src/setting.h
 
 FORMS += \

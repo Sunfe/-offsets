@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QGridLayout>
 
 #include "setting.h"
 #include "ui_setting.h"
@@ -21,6 +22,7 @@ Setting::~Setting()
 #define GLB_MAX_OFFSET_ITEM  (5)
 void Setting::addOffsetItem()
 {
+#if 0
     QGridLayout *offsetGroup = ui->layoutOffsetGroup;
     QLabel *offsetLabel = new QLabel("Type");
     QLineEdit *lineEdit = new QLineEdit(this);
@@ -38,6 +40,8 @@ void Setting::addOffsetItem()
 
     offsetGroup->addWidget(offsetLabel,row,0);
     offsetGroup->addWidget(lineEdit, row,1);
+#endif
+
     return;
 }
 

@@ -2,6 +2,7 @@
 #define OFFSETS_H
 
 #include <QMainWindow>
+#include "profile.h"
 
 namespace Ui {
 class Offsets;
@@ -21,6 +22,7 @@ private slots:
 
 private:
     Ui::Offsets *ui;
+    Profile *profile;
 };
 
 #endif // OFFSETS_H
