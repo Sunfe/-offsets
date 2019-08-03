@@ -1,5 +1,6 @@
 #include<QMessageBox>
 #include "offsets.h"
+#include "setting.h"
 #include "ui_offsets.h"
 
 Offsets::Offsets(QWidget *parent) :
@@ -17,8 +18,12 @@ Offsets::~Offsets()
 
 void Offsets::parse()
 {
-    QMessageBox box;
-    box.setText("excute");
-    box.exec();
     return;
+}
+
+
+void Offsets::showSetting()
+{
+    Setting *set = new Setting(this);
+    set->show();
 }

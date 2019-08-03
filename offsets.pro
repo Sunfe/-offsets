@@ -28,13 +28,16 @@ MOC_DIR = build
 UI_DIR = build
 SOURCES += \
         src/main.cpp \
-        src/offsets.cpp
+        src/offsets.cpp \
+        src/setting.cpp
 
 HEADERS += \
-        src/offsets.h
+        src/offsets.h \
+        src/setting.h
 
 FORMS += \
-        ui/offsets.ui
+        ui/offsets.ui \
+        ui/setting.ui
 
 RESOURCES += \
     offset.qrc

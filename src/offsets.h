@@ -17,6 +17,7 @@ public:
 
 private slots:
     void parse();
+    void showSetting();
 
 private:
     Ui::Offsets *ui;
