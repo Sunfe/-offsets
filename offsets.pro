@@ -23,7 +23,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
-
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
 SOURCES += \
         src/main.cpp \
         src/offsets.cpp
@@ -33,3 +35,17 @@ HEADERS += \
 
 FORMS += \
         ui/offsets.ui
+
+RESOURCES += \
+    offset.qrc
+
+
+CONFIG += debug
+DESTDIR = bin
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
+
+debug {
+ QT +=  widgets
+}

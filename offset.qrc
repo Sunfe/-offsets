@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/offsets">
+        <file>images/copy.png</file>
+        <file>images/arrow_right.png</file>
+    </qresource>
+</RCC>

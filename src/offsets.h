@@ -15,6 +15,9 @@ public:
     explicit Offsets(QWidget *parent = nullptr);
     ~Offsets();
 
+private slots:
+    void parse();
+
 private:
     Ui::Offsets *ui;
 };
