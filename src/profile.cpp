@@ -22,7 +22,13 @@ Profile::Profile()
 }
 
 
-QJsonObject Profile::StrToJson(QString str)
+Profile::~Profile()
+{
+
+}
+
+
+QJsonObject Profile::strToJson(QString str)
 {
     QJsonObject obj;
     QStringList list = str.split(';');
@@ -58,15 +64,10 @@ QJsonObject Profile::loadProfile(qint8 type)
     QJsonObject obj;
 
     if (Profile::ETH == type)
-        obj = StrToJson(gPrfEther);
+        obj = strToJson(gPrfEther);
     else if (Profile::IP == type)
-        obj = StrToJson(gPrfIp);
+        obj = strToJson(gPrfIp);
 
     return obj;
 }
 
-
-Profile::~Profile()
-{
-
-}

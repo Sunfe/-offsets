@@ -23,7 +23,7 @@ public:
     QJsonObject loadProfile(qint8 type);
     void updateProfile();
 
-    QJsonObject StrToJson(QString str);
+    QJsonObject strToJson(QString str);
 
 
 private:

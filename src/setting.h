@@ -15,11 +15,14 @@ public:
     explicit Setting(QWidget *parent = nullptr);
     ~Setting();
 
+
 private slots:
     void addOffsetItem();
     void delOffsetItem();
+
 private:
     Ui::Setting *ui;
+    qint8 d_type;
 };
 
 #endif // SETTING_H
