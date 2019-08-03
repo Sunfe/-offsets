@@ -2,6 +2,7 @@
 #define SETTING_H
 
 #include <QDialog>
+#include "profile.h"
 
 namespace Ui {
 class Setting;
@@ -12,17 +13,14 @@ class Setting : public QDialog
     Q_OBJECT
 
 public:
-    explicit Setting(QWidget *parent = nullptr);
+    explicit Setting(QWidget *parent = nullptr, Profile *prf=nullptr);
     ~Setting();
 
-
 private slots:
-    void addOffsetItem();
-    void delOffsetItem();
 
 private:
     Ui::Setting *ui;
-    qint8 d_type;
+    Profile *profile;
 };
 
 #endif // SETTING_H

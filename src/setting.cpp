@@ -3,49 +3,28 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QGridLayout>
+#include <QStringList>
+#include <QDebug>
 
-#include "setting.h"
 #include "ui_setting.h"
+#include "setting.h"
+#include "offsets.h"
 
-Setting::Setting(QWidget *parent) :
+Setting::Setting(QWidget *parent, Profile *prf) :
     QDialog(parent),
     ui(new Ui::Setting)
 {
     ui->setupUi(this);
+
+    if (prf != nullptr)
+    {
+        QString str = prf->getDataStr();
+        ui->plainTextEdit->setPlainText(str);
+    }
 }
+
 
 Setting::~Setting()
 {
     delete ui;
-}
-
-#define GLB_MAX_OFFSET_ITEM  (5)
-void Setting::addOffsetItem()
-{
-#if 0
-    QGridLayout *offsetGroup = ui->layoutOffsetGroup;
-    QLabel *offsetLabel = new QLabel("Type");
-    QLineEdit *lineEdit = new QLineEdit(this);
-
-
-    int row = offsetGroup->rowCount() + 1;
-    if (row > GLB_MAX_OFFSET_ITEM)
-    {
-        QMessageBox *msg = new QMessageBox();
-        int i = GLB_MAX_OFFSET_ITEM;
-        msg->setText(QString("only supported to %1 items").arg(i));
-        msg->exec();
-        return;
-    }
-
-    offsetGroup->addWidget(offsetLabel,row,0);
-    offsetGroup->addWidget(lineEdit, row,1);
-#endif
-
-    return;
-}
-
-void Setting::delOffsetItem()
-{
-    return;
 }

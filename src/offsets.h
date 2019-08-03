@@ -19,9 +19,12 @@ public:
     void setDataType(qint8 type);
     qint8 getDataType();
 
+    Profile *getProfile();
+    void setProfile(Profile prf);
+
 private slots:
     void parse();
-    void showSetting();
+    void editSetting();
     void onRadioBtnClick(bool checked);
 
 private:

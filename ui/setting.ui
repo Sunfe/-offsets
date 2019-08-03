@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="btnGroupSubmit">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>380</y>
+     <x>130</x>
+     <y>400</y>
      <width>171</width>
      <height>32</height>
     </rect>
@@ -32,17 +32,17 @@
   <widget class="QPlainTextEdit" name="plainTextEdit">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>10</x>
      <y>30</y>
-     <width>221</width>
-     <height>341</height>
+     <width>291</width>
+     <height>361</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>10</x>
      <y>10</y>
      <width>221</width>
      <height>16</height>

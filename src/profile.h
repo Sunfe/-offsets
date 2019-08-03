@@ -17,18 +17,21 @@ public:
         FPP_META
     };
 
-    Profile();
+    Profile(qint8 type = Profile::FPP_META);
     ~Profile();
 
-    QJsonObject loadProfile(qint8 type);
-    void updateProfile();
+    void loadData(qint8 type);
+    void updateData(QJsonObject dt);
+    QJsonObject getData();
+    QString getDataStr();
 
     QJsonObject strToJson(QString str);
+    QString jsonToStr(QJsonObject obj);
 
 
 private:
     /* profile type: 0:ethernet frmae; 1: ip frame; 2: udp frame; 3:fpp meta frame*/
-    QPair<QString, qint16> offset[GLB_MAX_OFFSETS_CNT];
+    QJsonObject data;
 
 };
 

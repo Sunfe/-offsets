@@ -12,8 +12,9 @@ Offsets::Offsets(QWidget *parent) :
     ui(new Ui::Offsets)
 {
     ui->setupUi(this);
+    ui->radioBtnMetaframe->setChecked(true);
 
-    profile = new Profile();
+    profile = new Profile(Profile::FPP_META);
 
 }
 
@@ -27,9 +28,9 @@ void Offsets::parse()
     return;
 }
 
-void Offsets::showSetting()
+void Offsets::editSetting()
 {
-    Setting *set = new Setting(this);
+    Setting *set = new Setting(this,profile);
     set->show();
 }
 
@@ -66,3 +67,18 @@ void Offsets::onRadioBtnClick(bool checked)
 
    return;
 }
+
+
+Profile* Offsets::getProfile()
+{
+    return profile;
+}
+
+
+void Offsets::setProfile(Profile prf)
+{
+   *profile = prf;
+   return;
+}
+
+
