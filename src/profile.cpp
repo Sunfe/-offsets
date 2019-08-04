@@ -14,7 +14,7 @@ static const char *gPrfEther =
         "len: 8.12";
 
 static const char *gPrfIp =
-        "Transaction Identifier:0.4;"
+        "Transaction Identifie r:0.4;"
         "Protocol Identifier:4.8;"
         "Length Field:20.4";
 
@@ -65,7 +65,7 @@ QString Profile::jsonToStr(QJsonObject obj)
     QStringList::iterator itr = keys.begin();
     while(itr != keys.end())
     {
-        str.append(QString("%1:%2").arg(*itr, -30).arg(obj.value(*itr).toString()) + QString("\n"));
+        str.append(QString("%1 : %2").arg(*itr, -20).arg(obj.value(*itr).toString(), 10) + QString("\n"));
         itr++;
     }
 
