@@ -9,22 +9,21 @@
 /* inner default profiles
  * format: param: offset.bytes */
 static const char *gPrfEther =
-        "src: 0.4;"
-        "des: 4.4;"
-        "len: 8.12";
+        "src: 0/4;"
+        "des: 4/4;"
+        "len: 8/12";
 
 static const char *gPrfIp =
-        "Transaction Identifie r:0.4;"
-        "Protocol Identifier:4.8;"
-        "Length Field:20.4";
+        "Transaction Identifier:0/4;"
+        "Protocol Identifier:4/8;"
+        "Length Field:20/4";
 
 static const char *gPrfFppMetaframe =
-        "FPP Identifier:0.4;"
-        "FPP Length Field:20.4";
+        "FPP Identifier:0/4;"
+        "FPP Length Field:20/4";
 
 Profile::Profile(qint8 type)
 {
-    qDebug() << type;
    loadData(type);
 }
 
@@ -75,7 +74,7 @@ QString Profile::jsonToStr(QJsonObject obj)
 
 QString Profile::getDataStr()
 {
-    return jsonToStr(data);
+    return jsonToStr(data[d_type]);
 }
 
 
@@ -90,21 +89,50 @@ void Profile::loadData(qint8 type)
     else if (Profile::FPP_META == type)
         obj = strToJson(gPrfFppMetaframe);
 
-    qDebug()<<type;
-    updateData(obj);
-    return;
-}
-
-void Profile::updateData(QJsonObject dt)
-{
-    data = dt;
+    updateData(obj, type);
     return;
 }
 
 
-QJsonObject Profile::getData()
+void Profile::updateData(QJsonObject dt, qint8 type)
 {
-    return data;
+    if (type > GLB_MAX_PRF_NUM)
+    {
+        return;
+    }
+
+    data[type] = dt;
+    setType(type);
+
+    return;
 }
 
+
+QJsonObject Profile::getData(qint8 type)
+{
+    if (type > GLB_MAX_PRF_NUM)
+    {
+        return  data[GLB_MAX_PRF_NUM - 1];;
+    }
+
+    return data[0];
+}
+
+
+qint8 Profile::getType()
+{
+    return d_type;
+}
+
+
+void Profile::setType(qint8 type)
+{
+    if (type > GLB_MAX_PRF_NUM)
+    {
+        type = FPP_META;
+    }
+
+    d_type = type;
+    return;
+}
 

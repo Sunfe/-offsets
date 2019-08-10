@@ -30,7 +30,8 @@ void Offsets::parse()
 
 void Offsets::editSetting()
 {
-    Setting *set = new Setting(this,profile);
+    profile->loadData(d_type);
+    Setting *set = new Setting(this, profile);
     set->show();
 }
 
