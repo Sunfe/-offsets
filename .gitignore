@@ -2,3 +2,13 @@
 offsets.pro.user
 .DS_Store
 /debug/
+.qmake.stash
+.vs/
+GeneratedFiles/
+bin/
+build/
+offsets.vcxproj
+offsets.vcxproj.filters
+offsets.vcxproj.user
+x64/
+

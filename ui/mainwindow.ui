@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Offsets</class>
- <widget class="QMainWindow" name="Offsets">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -135,7 +135,7 @@
   <connection>
    <sender>btnParse</sender>
    <signal>clicked()</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>parse()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -151,7 +151,7 @@
   <connection>
    <sender>btnSetting</sender>
    <signal>clicked()</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>editSetting()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -167,7 +167,7 @@
   <connection>
    <sender>radioBtnEth</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>onRadioBtnClick(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -183,7 +183,7 @@
   <connection>
    <sender>radioBtnMetaframe</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>onRadioBtnClick(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -199,7 +199,7 @@
   <connection>
    <sender>radioBtnUdp</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>onRadioBtnClick(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -215,7 +215,7 @@
   <connection>
    <sender>radioBtnIp</sender>
    <signal>clicked(bool)</signal>
-   <receiver>Offsets</receiver>
+   <receiver>MainWindow</receiver>
    <slot>onRadioBtnClick(bool)</slot>
    <hints>
     <hint type="sourcelabel">

@@ -8,7 +8,7 @@
 
 #include "ui_setting.h"
 #include "setting.h"
-#include "offsets.h"
+#include "mainwindow.h"
 
 Setting::Setting(QWidget *parent, Profile *prf) :
     QDialog(parent),

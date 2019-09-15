@@ -2,14 +2,14 @@
 #include <QMessageBox>
 #include <QPair>
 #include <QDebug>
-#include "offsets.h"
+#include "mainwindow.h"
 #include "setting.h"
-#include "ui_offsets.h"
+#include "ui_mainwindow.h"
 
 
-Offsets::Offsets(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Offsets)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->radioBtnMetaframe->setChecked(true);
@@ -18,17 +18,17 @@ Offsets::Offsets(QWidget *parent) :
 
 }
 
-Offsets::~Offsets()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void Offsets::parse()
+void MainWindow::parse()
 {
     return;
 }
 
-void Offsets::editSetting()
+void MainWindow::editSetting()
 {
     profile->loadData(d_type);
     Setting *set = new Setting(this, profile);
@@ -36,19 +36,19 @@ void Offsets::editSetting()
 }
 
 
-void Offsets::setDataType(qint8 type)
+void MainWindow::setDataType(qint8 type)
 {
     d_type = type;
 }
 
 
-qint8 Offsets::getDataType()
+qint8 MainWindow::getDataType()
 {
     return d_type;
 }
 
 
-void Offsets::onRadioBtnClick(bool checked)
+void MainWindow::onRadioBtnClick(bool checked)
 {
    QRadioButton *snd = qobject_cast<QRadioButton *>(sender());
 
@@ -70,13 +70,13 @@ void Offsets::onRadioBtnClick(bool checked)
 }
 
 
-Profile* Offsets::getProfile()
+Profile* MainWindow::getProfile()
 {
     return profile;
 }
 
 
-void Offsets::setProfile(Profile prf)
+void MainWindow::setProfile(Profile prf)
 {
    *profile = prf;
    return;

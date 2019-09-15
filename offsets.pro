@@ -28,17 +28,17 @@ MOC_DIR = build
 UI_DIR = build
 SOURCES += \
         src/main.cpp \
-        src/offsets.cpp \
+        src/mainwindow.cpp \
         src/profile.cpp \
         src/setting.cpp
 
 HEADERS += \
-        src/offsets.h \
+        src/mainwindow.h \
         src/profile.h \
         src/setting.h
 
 FORMS += \
-        ui/offsets.ui \
+        ui/mainwindow.ui \
         ui/setting.ui
 
 RESOURCES += \

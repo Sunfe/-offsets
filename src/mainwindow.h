@@ -5,16 +5,16 @@
 #include "profile.h"
 
 namespace Ui {
-class Offsets;
+class MainWindow;
 }
 
-class Offsets : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Offsets(QWidget *parent = nullptr);
-    ~Offsets();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
     void setDataType(qint8 type);
     qint8 getDataType();
@@ -28,7 +28,7 @@ private slots:
     void onRadioBtnClick(bool checked);
 
 private:
-    Ui::Offsets *ui;
+    Ui::MainWindow *ui;
 
     Profile *profile;
     qint8 d_type;

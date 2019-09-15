@@ -1,10 +1,10 @@
-#include "offsets.h"
 #include <QApplication>
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Offsets w;
+    MainWindow w;
     w.show();
 
     return a.exec();
