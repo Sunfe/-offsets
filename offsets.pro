@@ -27,13 +27,17 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 SOURCES += \
+        src/element.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
+        src/offset.cpp \
         src/profile.cpp \
         src/setting.cpp
 
 HEADERS += \
+        src/element.h \
         src/mainwindow.h \
+        src/offset.h \
         src/profile.h \
         src/setting.h
 

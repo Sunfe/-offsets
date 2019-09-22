@@ -1,23 +1,29 @@
-#ifndef SHIFT_H
+#ifndef OFFSET_H
 #define OFFSET_H
 #include <QtGlobal>
+#include <QString>
+#include <QVector>
+#include "element.h"
 
 class Offset
 {
 public:
-    enum DISPLAY{
-        FTM_HEX,                  /* 16进制格式显示 */
-        FTM_DEC                   /* 10进制格式显示 */
-    };
 
-	Offset();
+    Offset(QVector<Element> elems, QString buf);
+
+    QString extractData(Element elem);
+
+    void setBuf(QString buf);
+    QString getBuf();
+
+    void setElements( QVector<Element> elems);
+    void setElement( qint32 pos, Element elem);
+    Element getElement(qint32 pos);
+    qint32 getElementCount();
 
 private:
-    qint32 byteOffset;
-    qint32 byteLen;
-    qint32 bitOffset;
-    qint32 bitLen;
-    qint8  displayFtm;
+    QVector<Element> elems;
+    QString buf;
 
 };
 

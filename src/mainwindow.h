@@ -1,5 +1,5 @@
-#ifndef OFFSETS_H
-#define OFFSETS_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include "profile.h"
@@ -34,4 +34,4 @@ private:
     qint8 d_type;
 };
 
-#endif // OFFSETS_H
+#endif // MAINWINDOW_H
