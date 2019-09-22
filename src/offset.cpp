@@ -7,52 +7,57 @@ Offset::Offset(QVector<Element> elems, QString buf)
     this->buf   = buf;
 }
 
+Offset::~Offset()
+{
+
+}
+
 QString Offset::extractData(Element elem)
 {
-    if (buf.isEmpty())
-        return QString("%1").arg(0); /* 异常返回0值*/
+	if (buf.isEmpty())
+		return QString("%1").arg(0); /* 异常返回0值*/
 
-    qint32 byOffset = elem.getByteLen();
-    qint32 byLen    = elem.getByteLen();
-    qint32 biOffset = elem.getBitOffset();
-    qint32 biLen    = elem.getBitLen();
+	qint32 byOffset = elem.getByteLen();
+	qint32 byLen    = elem.getByteLen();
+	qint32 biOffset = elem.getBitOffset();
+	qint32 biLen    = elem.getBitLen();
 
-    if (0 == byLen)
-    {
-        return QString("%1").arg(0); /* 异常返回0值*/
-    }
-	
-    QString dtStr = buf.mid(byOffset, byLen);
-    /* 常见情况1：没有比特偏移的情况,直接取出 */
-    if ((0 ==biOffset) && (0 == biLen))
-    {
-        return dtStr;
-    }
-    else if(0 != biLen)
-    {
-        int val = 0;
-        bool ok = false;
+	if (0 == byLen)
+	{
+		return QString("%1").arg(0); /* 异常返回0值*/
+	}
 
-        if (byLen <= 4)
-        {
-            val = dtStr.toInt(&ok, 16);
-        }
-        else if (byLen <= 8)
-        {
-            val = dtStr.toInt(&ok, 16);
-        }
+	QString dtStr = buf.mid(byOffset, byLen);
+	/* 常见情况1：没有比特偏移的情况,直接取出 */
+	if ((0 == biOffset) && (0 == biLen))
+	{
+		return dtStr;
+	}
+	else if (0 != biLen)
+	{
+		int val = 0;
+		bool ok = false;
 
-        if (ok)
-        {
-            qint32 upperShiftNum = byLen * 8 - (biOffset + biLen);
-            val <<= upperShiftNum;
-            val >>= byLen * 8 - biLen;
-            return QString("%1").arg(val,0,16);
-        }
-    }
+		if (byLen <= 4)
+		{
+			val = dtStr.toInt(&ok, 16);
+		}
+		else if (byLen <= 8)
+		{
+			val = dtStr.toInt(&ok, 16);
+		}
 
-        /* 其他情况均认为异常 */
-        return QString("%1").arg(0);
+		if (ok)
+		{
+			qint32 upperShiftNum = byLen * 8 - (biOffset + biLen);
+			val <<= upperShiftNum;
+			val >>= byLen * 8 - biLen;
+			return QString("%1").arg(val, 0, 16);
+		}
+	}
+
+	/* 其他情况均认为异常 */
+	return QString("%1").arg(0);
 }
 
 void Offset::setBuf(QString buf)

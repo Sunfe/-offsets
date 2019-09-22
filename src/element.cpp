@@ -1,23 +1,33 @@
 #include "element.h"
 
+Element::Element()
+{
+
+}
+
 Element::Element(QString n, qint32 byteOffset, qint32 byteLen, qint32 bitOffset, qint32 bitLen, FMT fmt)
 {
-    name = n;
+    name             = n;
     this->byteOffset = byteOffset;
-    this->byteLen = byteLen;
-    this->bitOffset = bitOffset;
-    this->bitLen = bitLen;
-    disaplyFmt = fmt;
+    this->byteLen    = byteLen;
+    this->bitOffset  = bitOffset;
+    this->bitLen     = bitLen;
+    disaplyFmt         = fmt;
 }
 
 Element::Element(const Element &elem)
 {
-    name = elem.name;
+    name       = elem.name;
     byteOffset = elem.byteOffset;
-    byteLen = elem.byteLen;
-    bitOffset = elem.bitOffset;
-    bitLen = elem.bitLen;
+    byteLen    = elem.byteLen;
+    bitOffset  = elem.bitOffset;
+    bitLen     = elem.bitLen;
     disaplyFmt = elem.disaplyFmt;
+}
+
+Element::~Element()
+{
+
 }
 
 void Element::setName(QString n)
@@ -34,6 +44,7 @@ void Element::setByteOffset(qint32 o)
 {
     byteOffset = o;
 }
+
 qint32 Element::getByteOffset()
 {
     return byteOffset;
