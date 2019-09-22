@@ -12,10 +12,10 @@ public:
         TEXT
     };
 
-	Element();
+    Element();
     Element(QString n, qint32 byteOffset=0, qint32 byteLen=0, qint32 bitOffset=0, qint32 bitLen=0, FMT fmt=HEX);
     Element(const Element &elem);
-	~Element();
+    ~Element();
 
     void setName(QString n);
     QString getName();

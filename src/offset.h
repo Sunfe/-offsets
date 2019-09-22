@@ -10,7 +10,7 @@ class Offset
 public:
 
     Offset(QVector<Element> elems, QString buf);
-	~Offset();
+    ~Offset();
 
     QString extractData(Element elem);
 
