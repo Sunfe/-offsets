@@ -3,6 +3,7 @@
 #include <QString>
 #include <QPair>
 #include <QJsonObject>
+#include "offset.h"
 
 #define GLB_MAX_OFFSETS_CNT     (128)
 #define GLB_MAX_PRF_NUM         (10)
@@ -18,7 +19,7 @@ public:
         FPP_META
     };
 
-    Profile(qint8 type = Profile::FPP_META);
+    Profile(QString *buf);
     ~Profile();
 
     void loadData(qint8 type);
@@ -37,6 +38,9 @@ private:
     /* profile type: 0:ethernet frmae; 1: ip frame; 2: udp frame; 3:fpp meta frame*/
     QJsonObject data[GLB_MAX_PRF_NUM];
     qint8 d_type;
+
+    QVector<Offset> d_offsets{GLB_MAX_PRF_NUM};
+    QString *d_buf;
 
 };
 

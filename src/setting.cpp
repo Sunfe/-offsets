@@ -23,7 +23,6 @@ Setting::Setting(QWidget *parent, Profile *prf) :
     }
 }
 
-
 Setting::~Setting()
 {
     delete ui;

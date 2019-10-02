@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->radioBtnMetaframe->setChecked(true);
 
-    profile = new Profile(Profile::FPP_META);
+    profile = new Profile(nullptr);
 
 }
 
@@ -41,12 +41,10 @@ void MainWindow::setDataType(qint8 type)
     d_type = type;
 }
 
-
 qint8 MainWindow::getDataType()
 {
     return d_type;
 }
-
 
 void MainWindow::onRadioBtnClick(bool checked)
 {
@@ -69,12 +67,10 @@ void MainWindow::onRadioBtnClick(bool checked)
    return;
 }
 
-
 Profile* MainWindow::getProfile()
 {
     return profile;
 }
-
 
 void MainWindow::setProfile(Profile prf)
 {

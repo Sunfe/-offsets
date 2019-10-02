@@ -1,10 +1,13 @@
 #include "offset.h"
 
-Offset::Offset(QVector<Element> elems, QString buf)
+Offset::Offset()
 {
 
+}
+
+Offset::Offset(QVector<Element> elems)
+{
     this->elems = elems;
-    this->buf   = buf;
 }
 
 Offset::~Offset()
@@ -12,7 +15,7 @@ Offset::~Offset()
 
 }
 
-QString Offset::extractData(Element elem)
+QString Offset::extractData(QString buf, Element elem)
 {
     if (buf.isEmpty())
         return QString("%1").arg(0); /* 异常返回0值*/
@@ -93,6 +96,11 @@ Element Offset::getElement(qint32 pos)
         return  Element(QString(""));
     }
     return elems[pos];
+}
+
+void Offset::appendElement(Element elem)
+{
+    return elems.append(elem);
 }
 
 qint32 Offset::getElementCount()

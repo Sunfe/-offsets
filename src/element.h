@@ -13,7 +13,7 @@ public:
     };
 
     Element();
-    Element(QString n, qint32 byteOffset=0, qint32 byteLen=0, qint32 bitOffset=0, qint32 bitLen=0, FMT fmt=HEX);
+    Element(QString name, qint32 byteOffset=0, qint32 byteLen=0, qint32 bitOffset=0, qint32 bitLen=0, FMT format=HEX);
     Element(const Element &elem);
     ~Element();
 

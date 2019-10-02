@@ -9,10 +9,12 @@ class Offset
 {
 public:
 
-    Offset(QVector<Element> elems, QString buf);
+    Offset();
+    Offset(QVector<Element> elems);
     ~Offset();
 
-    QString extractData(Element elem);
+    /* 从一块缓冲区中解析出某个元素的数据 */
+    QString extractData(QString buf, Element elem);
 
     void setBuf(QString buf);
     QString getBuf();
@@ -20,6 +22,7 @@ public:
     void setElements( QVector<Element> elems);
     void setElement( qint32 pos, Element elem);
     Element getElement(qint32 pos);
+    void appendElement(Element elem);
     qint32 getElementCount();
 
 private:

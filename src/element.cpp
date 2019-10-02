@@ -5,14 +5,14 @@ Element::Element()
 
 }
 
-Element::Element(QString n, qint32 byteOffset, qint32 byteLen, qint32 bitOffset, qint32 bitLen, FMT fmt)
+Element::Element(QString name, qint32 byteOffset, qint32 byteLen, qint32 bitOffset, qint32 bitLen, FMT format)
 {
-    name             = n;
+    this->name       = name;
     this->byteOffset = byteOffset;
     this->byteLen    = byteLen;
     this->bitOffset  = bitOffset;
     this->bitLen     = bitLen;
-    disaplyFmt         = fmt;
+    this->disaplyFmt = format;
 }
 
 Element::Element(const Element &elem)
