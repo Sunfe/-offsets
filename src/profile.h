@@ -3,10 +3,9 @@
 #include <QString>
 #include <QPair>
 #include <QJsonObject>
-#include "offset.h"
 
-#define GLB_MAX_OFFSETS_CNT     (128)
-#define GLB_MAX_PRF_NUM         (10)
+#include "global.h"
+#include "offset.h"
 
 
 class Profile
@@ -33,6 +32,8 @@ public:
     void setType(qint8 type);
     qint8 getType();
 
+    void setBuf(QString *buf);
+    Offset *getOffset(qint16 type);
 
 private:
     /* profile type: 0:ethernet frmae; 1: ip frame; 2: udp frame; 3:fpp meta frame*/

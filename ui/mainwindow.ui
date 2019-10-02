@@ -133,22 +133,6 @@
  </resources>
  <connections>
   <connection>
-   <sender>btnParse</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>parse()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>173</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>311</x>
-     <y>223</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>btnSetting</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -228,10 +212,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>src</sender>
+   <signal>textChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>parze()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>parse()</slot>
   <slot>onRadioBtnClick(bool)</slot>
   <slot>editSetting()</slot>
+  <slot>parze()</slot>
  </slots>
 </ui>

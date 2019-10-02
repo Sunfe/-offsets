@@ -22,10 +22,11 @@ public:
     Profile *getProfile();
     void setProfile(Profile prf);
 
+
 private slots:
-    void parse();
     void editSetting();
     void onRadioBtnClick(bool checked);
+    void parze();
 
 private:
     Ui::MainWindow *ui;

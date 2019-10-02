@@ -36,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
         src/element.h \
+        src/global.h \
         src/mainwindow.h \
         src/offset.h \
         src/profile.h \

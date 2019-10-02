@@ -27,9 +27,9 @@ Profile::Profile(QString *buf)
 {
 #if 0
     QVector<Element> fppFrame;
-    fppFrame.append(Element(QString("src"),  0, 4, 0, 0));
-    fppFrame.append(Element(QString("des"),  0, 4, 0, 0));
-    fppFrame.append(Element(QString("type"), 0, 4, 0, 0));
+    fppFrame.append(Element(QString("src mac"),  0, 4, 0, 0));
+    fppFrame.append(Element(QString("des mac"),  0, 4, 0, 0));
+    fppFrame.append(Element(QString("type/len"), 0, 4, 0, 0));
 #endif
 
     /* Ethernet II :
@@ -37,9 +37,9 @@ Profile::Profile(QString *buf)
      * src mac      des mac       type/len      data        fcs
      */
     QVector<Element> eth;
-    eth.append(Element(QString("src"),  0,  6, 0, 0));
-    eth.append(Element(QString("des"),  6,  6, 0, 0));
-    eth.append(Element(QString("type"), 10, 2, 0, 0));
+    eth.append(Element(QString("src mac"),  0,  6, 0, 0));
+    eth.append(Element(QString("des mac"),  6,  6, 0, 0));
+    eth.append(Element(QString("type/len"), 10, 2, 0, 0));
 
   #if 0
 
@@ -167,7 +167,6 @@ QJsonObject Profile::getData(qint8 type)
     return data[0];
 }
 
-
 qint8 Profile::getType()
 {
     return d_type;
@@ -184,3 +183,12 @@ void Profile::setType(qint8 type)
     return;
 }
 
+void Profile::setBuf(QString *buf)
+{
+    this->d_buf = buf;
+}
+
+Offset* Profile::getOffset(qint16 type)
+{
+    return (type < GLB_MAX_PRF_NUM)? &d_offsets[type] : nullptr;
+}

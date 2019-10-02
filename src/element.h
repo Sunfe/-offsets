@@ -33,6 +33,8 @@ public:
     void setDisplayFmt(FMT fmt);
     FMT getDisplayFmt();
 
+    QString format();
+
 private:
     QString name;
     qint32 byteOffset;
