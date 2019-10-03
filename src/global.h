@@ -5,6 +5,6 @@
 
 #define GLB_MAX_OFFSETS_CNT     (128)
 #define GLB_MAX_PRF_NUM         (10)
-
+ #define GLB_MAC_BYTE_LEN       (6)
 
 #endif // GLOBAL_H

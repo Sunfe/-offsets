@@ -6,6 +6,10 @@
 
 #include "global.h"
 #include "offset.h"
+#include "ethoffset.h"
+#include "ipoffset.h"
+#include "udpoffset.h"
+#include "fppoffset.h"
 
 
 class Profile
@@ -33,6 +37,7 @@ public:
     qint8 getType();
 
     void setBuf(QString *buf);
+
     Offset *getOffset(qint16 type);
 
 private:
@@ -40,7 +45,13 @@ private:
     QJsonObject data[GLB_MAX_PRF_NUM];
     qint8 d_type;
 
-    QVector<Offset> d_offsets{GLB_MAX_PRF_NUM};
+    QVector<Offset*> d_offsets{GLB_MAX_PRF_NUM};
+    EthOffset *ethOffset;
+    IpOffset  *ipOffset;
+    UdpOffset *udpOffset;
+    FppOffset *fppOffset;
+
+
     QString *d_buf;
 
 };

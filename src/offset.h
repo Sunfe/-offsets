@@ -16,7 +16,7 @@ public:
     ~Offset();
 
     /* 从一块缓冲区中解析出某个元素的数据 */
-    void extractData(QString *buf);
+    void extractData();
     QString extractElemData(QString *buf, Element elem);
 
     void setElements( QVector<Element> elems);
@@ -28,10 +28,14 @@ public:
     QString formatData(QString in);
     virtual QString format();
 
-    QVector<QPair<QString, QString>> getData();
+    QString* getBuf();
+    void setBuf(QString *buf);
+
+    QVector<QPair<QString, QString>>* getData();
 
 private:
     QVector<Element> elems;
+    QString *d_buf;
     QVector<QPair<QString, QString>> d_data;
 
 };

@@ -26,48 +26,15 @@ static const char *gPrfFppMetaframe =
 Profile::Profile(QString *buf)
 {
 #if 0
-    QVector<Element> fppFrame;
-    fppFrame.append(Element(QString("src mac"),  0, 4, 0, 0));
-    fppFrame.append(Element(QString("des mac"),  0, 4, 0, 0));
-    fppFrame.append(Element(QString("type/len"), 0, 4, 0, 0));
+    ethOffset = new EthOffset();
+    ipOffset  = new IpOffset();
+    udpOffset = new UdpOffset();
+    fppOffset = new FppOffset();
 #endif
-
-
-  #if 0
-
-    /* IP :
-     * 6 byte       6 byte        2 byte      4~1500 byte  4byte
-     * src mac      des mac       0x0800      data          fcs
-     *
-     * data field:
-     *    0                   1                   2                   3
-     *  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |Version|  IHL  |Type of Service|          Total Length         |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |         Identification        |Flags|      Fragment Offset    |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |  Time to Live |    Protocol   |         Header Checksum       |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |                       Source Address                          |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |                    Destination Address                        |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     * |                    Options                    |    Padding    |
-     * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-     */
-    QVector<Element> ipFrame;
-    ipFrame.append(Element(QString("src"), 0, 4, 0, 0));
-    ipFrame.append(Element(QString("des"), 0, 4, 0, 0));
-    ipFrame.append(Element(QString("type"), 0, 4, 0, 0));
-
-
-    QVector<Element> udpFrame;
-    udpFrame.append(Element(QString("src"), 0, 4, 0, 0));
-    udpFrame.append(Element(QString("des"), 0, 4, 0, 0));
-    udpFrame.append(Element(QString("type"), 0, 4, 0, 0));
-
-#endif
+    d_offsets[Profile::ETH]      = new EthOffset();
+    d_offsets[Profile::IP]       = new IpOffset();
+    d_offsets[Profile::UDP]      = new UdpOffset();
+    d_offsets[Profile::FPP_META] = new FppOffset();
 
     d_buf = buf;
 }
@@ -181,5 +148,8 @@ void Profile::setBuf(QString *buf)
 
 Offset* Profile::getOffset(qint16 type)
 {
-    return (type < GLB_MAX_PRF_NUM)? &d_offsets[type] : nullptr;
+    if (type >= GLB_MAX_PRF_NUM)
+        return nullptr;
+
+    return d_offsets[type];
 }

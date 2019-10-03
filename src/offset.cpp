@@ -4,7 +4,7 @@
 
 Offset::Offset()
 {
-
+    d_buf = nullptr;
 }
 
 Offset::Offset(QVector<Element> elems)
@@ -36,7 +36,7 @@ QString Offset::extractElemData(QString *buf, Element elem)
     /* 常见情况1：没有比特偏移的情况,直接取出 */
     if ((0 == biOffset) && (0 == biLen))
     {
-        return formatData(dtStr);
+        return dtStr;
     }
     else if (0 != biLen)
     {
@@ -65,15 +65,20 @@ QString Offset::extractElemData(QString *buf, Element elem)
     return QString("%1").arg(0);
 }
 
-void Offset::extractData(QString *buf)
+void Offset::extractData()
 {
     QString de;
     QVector<QPair<QString, QString>> dv;
     QPair<QString, QString> pair;
 
+    if (!d_buf)
+    {
+        return;
+    }
+
     for(qint16 i = 0; i < elems.count(); i++)
     {
-        de = extractElemData(buf, elems.at(i));
+        de = extractElemData(d_buf, elems.at(i));
         dv.append(qMakePair(elems.value(i).getName(), de));
     }
 
@@ -115,15 +120,24 @@ qint32 Offset::getElementCount()
     return elems.count();
 }
 
-QVector<QPair<QString, QString>> Offset::getData()
+QVector<QPair<QString, QString>>* Offset::getData()
 {
-    return d_data;
+    return &d_data;
+}
+
+QString* Offset::getBuf()
+{
+    return d_buf;
+}
+
+void Offset::setBuf(QString *buf)
+{
+    d_buf = buf;
 }
 
 QString Offset::formatData(QString in)
 {
-
-    return in.toUpper();
+    return in;
 }
 
 QString Offset::format()

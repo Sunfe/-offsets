@@ -79,20 +79,25 @@ void MainWindow::onRadioBtnClick(bool checked)
 void MainWindow::parze()
 {
     QString buf = ui->src->toPlainText();
-    QVector<QPair<QString, QString>> data;
+    QVector<QPair<QString, QString>> *data;
     QString targetText;
     if (buf.isEmpty())
     {
         ui->target->clear();
         return;
     }
-#if 0
-    data = profile->getOffset(Profile::ETH)->extractData(&buf);
-    for (qint16 i = 0; i < data.count(); i++)
+
+    EthOffset *eth =dynamic_cast<EthOffset*>(profile->getOffset(Profile::ETH));
+    eth->setBuf(&buf);
+    eth->extractData();
+    eth->format();
+    data = eth->getData();
+
+    for (qint16 i = 0; i < data->count(); i++)
     {
-        targetText += QString("%1 : %2\n").arg(data.value(i).first).arg(data.value(i).second);
+        targetText += QString("%1 : %2\n").arg(data->value(i).first, -10).arg(data->value(i).second, -20);
     }
-#endif
+
     ui->target->setPlainText(targetText);
 
     return;
