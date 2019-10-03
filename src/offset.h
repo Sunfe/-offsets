@@ -3,6 +3,8 @@
 #include <QtGlobal>
 #include <QString>
 #include <QVector>
+#include <QPair>
+
 #include "element.h"
 
 class Offset
@@ -14,7 +16,7 @@ public:
     ~Offset();
 
     /* 从一块缓冲区中解析出某个元素的数据 */
-    QVector<QPair<QString, QString>> extractData(QString *buf);
+    void extractData(QString *buf);
     QString extractElemData(QString *buf, Element elem);
 
     void setElements( QVector<Element> elems);
@@ -24,9 +26,13 @@ public:
     qint32 getElementCount();
 
     QString formatData(QString in);
+    virtual QString format();
+
+    QVector<QPair<QString, QString>> getData();
 
 private:
     QVector<Element> elems;
+    QVector<QPair<QString, QString>> d_data;
 
 };
 

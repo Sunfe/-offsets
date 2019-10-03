@@ -86,13 +86,13 @@ void MainWindow::parze()
         ui->target->clear();
         return;
     }
-
+#if 0
     data = profile->getOffset(Profile::ETH)->extractData(&buf);
     for (qint16 i = 0; i < data.count(); i++)
     {
         targetText += QString("%1 : %2\n").arg(data.value(i).first).arg(data.value(i).second);
     }
-
+#endif
     ui->target->setPlainText(targetText);
 
     return;

@@ -32,14 +32,6 @@ Profile::Profile(QString *buf)
     fppFrame.append(Element(QString("type/len"), 0, 4, 0, 0));
 #endif
 
-    /* Ethernet II :
-     * 6 byte       6 byte        2 byte      4~1500 byte  4byte
-     * src mac      des mac       type/len      data        fcs
-     */
-    QVector<Element> eth;
-    eth.append(Element(QString("src mac"),  0,  6, 0, 0));
-    eth.append(Element(QString("des mac"),  6,  6, 0, 0));
-    eth.append(Element(QString("type/len"), 10, 2, 0, 0));
 
   #if 0
 
@@ -76,8 +68,7 @@ Profile::Profile(QString *buf)
     udpFrame.append(Element(QString("type"), 0, 4, 0, 0));
 
 #endif
-    Offset offset(eth);
-    d_offsets[Profile::ETH] = offset;
+
     d_buf = buf;
 }
 

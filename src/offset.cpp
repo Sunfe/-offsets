@@ -65,7 +65,7 @@ QString Offset::extractElemData(QString *buf, Element elem)
     return QString("%1").arg(0);
 }
 
-QVector<QPair<QString, QString>> Offset::extractData(QString *buf)
+void Offset::extractData(QString *buf)
 {
     QString de;
     QVector<QPair<QString, QString>> dv;
@@ -77,9 +77,9 @@ QVector<QPair<QString, QString>> Offset::extractData(QString *buf)
         dv.append(qMakePair(elems.value(i).getName(), de));
     }
 
-    return dv;
+    d_data = dv;
+    return;
 }
-
 
 void Offset::setElements( QVector<Element> elems)
 {
@@ -115,8 +115,28 @@ qint32 Offset::getElementCount()
     return elems.count();
 }
 
+QVector<QPair<QString, QString>> Offset::getData()
+{
+    return d_data;
+}
+
 QString Offset::formatData(QString in)
 {
 
     return in.toUpper();
 }
+
+QString Offset::format()
+{
+    if (d_data.isEmpty())
+        return QString("no data");
+
+    QString data;
+    for (qint16 i = 0; i < d_data.count(); i++)
+    {
+        data += QString("%1   :   %2\n").arg(d_data.value(i).first).arg(d_data.value(i).second);
+    }
+
+    return data.toUpper();
+}
+
