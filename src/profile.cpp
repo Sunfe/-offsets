@@ -15,27 +15,14 @@ static const char *gPrfEther =
         "des: 4/4;"
         "len: 8/12";
 
-static const char *gPrfIp =
-        "Transaction Identifier:0/4;"
-        "Protocol Identifier:4/8;"
-        "Length Field:20/4";
-
 static const char *gPrfFppMetaframe =
         "FPP Identifier:0/4;"
         "FPP Length Field:20/4";
 
 Profile::Profile(QString *buf)
 {
-#if 0
-    ethOffset = new EthOffset();
-    ipOffset  = new IpOffset();
-    udpOffset = new UdpOffset();
-    fppOffset = new FppOffset();
-#endif
     d_offsets[Profile::ETH]      = new EthOffset();
-    d_offsets[Profile::IP]       = new IpOffset();
     d_offsets[Profile::FPP_META] = new FppOffset();
-
     d_buf = buf;
 }
 
@@ -93,8 +80,6 @@ void Profile::loadData(qint8 type)
 
     if (Profile::ETH == type)
         obj = strToJson(gPrfEther);
-    else if (Profile::IP == type)
-        obj = strToJson(gPrfIp);
     else if (Profile::FPP_META == type)
         obj = strToJson(gPrfFppMetaframe);
 
@@ -150,7 +135,6 @@ Offset* Profile::getOffset(qint16 type)
 {
     if (type >= GLB_MAX_PRF_NUM)
         return nullptr;
-
     return d_offsets[type];
 }
 
@@ -173,43 +157,9 @@ QVector<QPair<QString, QString>>* Profile::parze(qint8 type)
     {
         return nullptr;
     }
+
+    return nullptr;
 }
 
-qint16 Profile::deriveFrameType()
-{
-    QString *buf     = d_buf;
-    qint16 frameType = 0;
-#if 0
-    if (nullptr == buf)
-    {
-        return frameType;
-    }
 
-    QString typeStr = buf->mid(GLOB_FRAME_TYPE_POS, GLOB_FRAME_TYPE_LEN);
-
-    bool ok;
-    qint32 val = typeStr.toInt(&ok, 16);
-    if (val < GLOB_FRAME_MAX_LEN)
-    {
-        frameType = EthOffset::ETH_FRAME_8023;
-        EthOffset *eth8023 = new EthOffset();
-    }
-    else
-    {
-        if (0x8100 == typeVal)
-        {
-            frameType = Profile::ETH_8021Q;
-        }
-        else if (0x0800 == typeVal)
-        {
-            frameType = Profile::IP;
-        }
-        else if (0x0806 == typeVal)
-        {
-            frameType = Profile::ARP;
-        }
-    }
-#endif
-    return frameType;
-}
 

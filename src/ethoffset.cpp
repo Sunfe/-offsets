@@ -44,7 +44,7 @@ void EthOffset::loadOffsetEth8023()
         eth.append(Element(QString("LEN"),  12, 2, 0, 0));
         setElements(eth);
     }
-    else if (GLOB_PROTOCAL_IP ==  protocal )
+    else if (GLOB_PROTOCAL_IP ==  protocal)
     {
         eth.append(Element(QString("TYPE"), 12, 2, 0, 0));
         setElements(eth);
@@ -160,7 +160,7 @@ void EthOffset::appendOffsetIpField()
 void EthOffset::adjustRangeByteOffset(qint32 start, qint32 end, qint32 deltaOffset)
 {
     qint32 cnt = getElementCount();
-    if (cnt >= start)
+    if (start >= cnt)
     {
         return;
     }
@@ -196,11 +196,11 @@ void EthOffset::insertOffset8023qTag()
     qint32 delta = 2;
     adjustRangeByteOffset(start, end, delta);
 
-    elems->insert(2, Element(QString("TPID"),      12, 1, 0,  0));
+    elems->insert(2, Element(QString("TPID"),      12, 2, 0,  0));
     /* TCI : PRIORITY, CFI, VLANID */
-    elems->insert(3, Element(QString("PRIORITY"),  13, 1, 13, 3));
-    elems->insert(3, Element(QString("CFI"),       13, 1, 12, 1));
-    elems->insert(3, Element(QString("VLANID"),    13, 1, 0,  12));
+    elems->insert(3, Element(QString("VLANID"),    14, 2, 0,  12));
+    elems->insert(4, Element(QString("CFI"),       14, 2, 12, 1));
+    elems->insert(5, Element(QString("PRIORITY"),  14, 2, 13, 3));
     return;
 }
 
@@ -240,27 +240,35 @@ QString EthOffset::format()
 
 void EthOffset::extractData()
 {
-    QString *buf = getBuf();
-    QString typeStr = buf->mid(GLOB_FRAME_TYPE_POS, GLOB_FRAME_TYPE_LEN);
-
-    bool ok;
-    qint32 type = typeStr.toInt(&ok, 16);
-
-
-    if (type > GLOB_FRAME_MAX_LEN)
+    Element *elem = new Element(QString("TAG"),  12, 2, 0, 0);
+    if (!elem)
     {
-        if (type == 0x8100)
-        {
-            isTagged = true;
-            protocal = 0;
-        }
-        else
-        {
-            isTagged = false;
-            protocal = type;
-        }
+       return;
     }
 
+    if (getElemDataStr(elem) == "8100")
+    {
+        isTagged = true;
+
+        Element *elem = new Element(QString("TYPE/LEN"), 16, 2, 0, 0);
+        QString tlStr = getElemDataStr(elem);
+
+        bool ok;
+        qint32 val = tlStr.toInt(&ok, 16);
+        protocal = (val > GLOB_FRAME_MAX_LEN)? val : 0;
+    }
+    else
+    {
+        isTagged = false;
+        Element *elem = new Element(QString("TYPE/LEN"), 12, 2, 0, 0);
+        QString tlStr = getElemDataStr(elem);
+
+        bool ok;
+        qint32 val = tlStr.toInt(&ok, 16);
+        protocal = (val > GLOB_FRAME_MAX_LEN)? val : 0;
+    }
+
+    loadOffsetEth8023();
     Offset::extractData();
     return;
 }

@@ -61,8 +61,6 @@ void MainWindow::onRadioBtnClick(bool checked)
 
     QList<QPair<QString, qint8>> list;
     list.append(qMakePair(QString("radioBtnEth"), Profile::ETH));
-    list.append(qMakePair(QString("radioBtnIp"), Profile::IP));
-    list.append(qMakePair(QString("radioBtnUdp"), Profile::UDP));
     list.append(qMakePair(QString("radioBtnMetaframe"), Profile::FPP_META));
 
     for (qint8 i = 0; i < list.count(); i++)
@@ -87,18 +85,11 @@ void MainWindow::parze()
         return;
     }
 
-#if 0
-    EthOffset *eth =dynamic_cast<EthOffset*>(profile->getOffset(Profile::ETH));
-    eth->setBuf(&buf);
-    eth->extractData();
-    eth->format();
-    data = eth->getData();
-#endif
-    profile->setBuf(buf);
-    data = profile->parze();
+    profile->setBuf(&buf);
+    data = profile->parze(Profile::ETH);
     for (qint16 i = 0; i < data->count(); i++)
     {
-        targetText += QString("%1 : %2\n").arg(data->value(i).first, -10).arg(data->value(i).second, -20);
+        targetText += QString("%1 : %2\n").arg(data->value(i).first, -20).arg(data->value(i).second, -20);
     }
 
     ui->target->setPlainText(targetText);

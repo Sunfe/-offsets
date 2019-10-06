@@ -22,7 +22,6 @@ QString Offset::extractElemData(QString *buf, Element elem)
     if (buf->isEmpty())
         return QString("%1").arg(0); /* 异常返回0值*/
 
-    qint32 byOffset = elem.getByteOffset();
     qint32 byLen    = elem.getByteLen();
     qint32 biOffset = elem.getBitOffset();
     qint32 biLen    = elem.getBitLen();
@@ -32,7 +31,7 @@ QString Offset::extractElemData(QString *buf, Element elem)
         return QString("%1").arg(0); /* 异常返回0值*/
     }
 
-    QString dtStr = buf->remove(QRegExp("\\s")).mid(byOffset * 2, byLen * 2); /* 2个字符一个byte */
+    QString dtStr = getElemDataStr(&elem);
     /* 常见情况1：没有比特偏移的情况,直接取出 */
     if ((0 == biOffset) && (0 == biLen))
     {
@@ -127,6 +126,20 @@ void Offset::appendElement(Element elem)
 qint32 Offset::getElementCount()
 {
     return elems.count();
+}
+
+QString Offset::getElemDataStr(Element *elem)
+{
+    if (!elem)
+    {
+        return QString("NULL");
+    }
+
+    qint32 byOffset = elem->getByteOffset();
+    qint32 byLen    = elem->getByteLen();
+
+    /* 2个字符一个byte */
+    return d_buf->remove(QRegExp("\\s")).mid(byOffset * 2, byLen * 2);
 }
 
 bool Offset::isEmpty()

@@ -25,6 +25,7 @@ public:
     Element getElement(qint32 pos);
     void appendElement(Element elem);
     qint32 getElementCount();
+    QString getElemDataStr(Element *elem);
     bool isEmpty();
 
     QString formatData(QString in);
@@ -32,6 +33,7 @@ public:
 
     QString* getBuf();
     void setBuf(QString *buf);
+
 
     QVector<QPair<QString, QString>>* getData();
 
