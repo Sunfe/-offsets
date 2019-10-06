@@ -43,6 +43,7 @@ QString Offset::extractElemData(QString *buf, Element elem)
         int val = 0;
         bool ok = false;
 
+        /* 只处理64位以下 */
         if (byLen <= 4)
         {
             val = dtStr.toInt(&ok, 16);
@@ -54,8 +55,11 @@ QString Offset::extractElemData(QString *buf, Element elem)
 
         if (ok)
         {
+            /* 屏蔽高于byLen*8的比特数目的比特位 */
+            quint32 setVal = (0x1<<16)-1;
             qint32 upperShiftNum = byLen * 8 - (biOffset + biLen);
             val <<= upperShiftNum;
+            val &= setVal;
             val >>= byLen * 8 - biLen;
             return QString("%1").arg(val, 0, 16);
         }
@@ -101,6 +105,11 @@ void Offset::setElement( qint32 pos, Element elem)
     return;
 }
 
+QVector<Element>* Offset::getElements()
+{
+    return &elems;
+}
+
 Element Offset::getElement(qint32 pos)
 {
     if (pos > elems.count())
@@ -118,6 +127,11 @@ void Offset::appendElement(Element elem)
 qint32 Offset::getElementCount()
 {
     return elems.count();
+}
+
+bool Offset::isEmpty()
+{
+return elems.isEmpty();
 }
 
 QVector<QPair<QString, QString>>* Offset::getData()

@@ -21,9 +21,11 @@ public:
 
     void setElements( QVector<Element> elems);
     void setElement( qint32 pos, Element elem);
+    QVector<Element> *getElements();
     Element getElement(qint32 pos);
     void appendElement(Element elem);
     qint32 getElementCount();
+    bool isEmpty();
 
     QString formatData(QString in);
     virtual QString format();

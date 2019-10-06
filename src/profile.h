@@ -17,8 +17,6 @@ class Profile
 public:
     enum PROFILE_TYPE {
         ETH,
-        IP,
-        UDP,
         FPP_META
     };
 
@@ -40,6 +38,8 @@ public:
 
     Offset *getOffset(qint16 type);
 
+    QVector<QPair<QString, QString>>* parze(qint8 type);
+    qint16 deriveFrameType();
 private:
     /* profile type: 0:ethernet frmae; 1: ip frame; 2: udp frame; 3:fpp meta frame*/
     QJsonObject data[GLB_MAX_PRF_NUM];
@@ -50,7 +50,6 @@ private:
     IpOffset  *ipOffset;
     UdpOffset *udpOffset;
     FppOffset *fppOffset;
-
 
     QString *d_buf;
 

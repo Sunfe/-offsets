@@ -6,6 +6,7 @@
 
 #include "profile.h"
 #include "element.h"
+#include "global.h"
 
 /* inner default profiles
  * format: param: offset.bytes */
@@ -33,7 +34,6 @@ Profile::Profile(QString *buf)
 #endif
     d_offsets[Profile::ETH]      = new EthOffset();
     d_offsets[Profile::IP]       = new IpOffset();
-    d_offsets[Profile::UDP]      = new UdpOffset();
     d_offsets[Profile::FPP_META] = new FppOffset();
 
     d_buf = buf;
@@ -153,3 +153,63 @@ Offset* Profile::getOffset(qint16 type)
 
     return d_offsets[type];
 }
+
+QVector<QPair<QString, QString>>* Profile::parze(qint8 type)
+{
+    if (nullptr == d_buf)
+    {
+        return nullptr;
+    }
+
+    if (Profile::ETH == type)
+    {
+        EthOffset *eth = new EthOffset();
+        eth->setBuf(d_buf);
+        eth->extractData();
+        eth->format();
+        return eth->getData();
+    }
+    else if (Profile::FPP_META == type)
+    {
+        return nullptr;
+    }
+}
+
+qint16 Profile::deriveFrameType()
+{
+    QString *buf     = d_buf;
+    qint16 frameType = 0;
+#if 0
+    if (nullptr == buf)
+    {
+        return frameType;
+    }
+
+    QString typeStr = buf->mid(GLOB_FRAME_TYPE_POS, GLOB_FRAME_TYPE_LEN);
+
+    bool ok;
+    qint32 val = typeStr.toInt(&ok, 16);
+    if (val < GLOB_FRAME_MAX_LEN)
+    {
+        frameType = EthOffset::ETH_FRAME_8023;
+        EthOffset *eth8023 = new EthOffset();
+    }
+    else
+    {
+        if (0x8100 == typeVal)
+        {
+            frameType = Profile::ETH_8021Q;
+        }
+        else if (0x0800 == typeVal)
+        {
+            frameType = Profile::IP;
+        }
+        else if (0x0806 == typeVal)
+        {
+            frameType = Profile::ARP;
+        }
+    }
+#endif
+    return frameType;
+}
+

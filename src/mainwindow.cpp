@@ -87,12 +87,15 @@ void MainWindow::parze()
         return;
     }
 
+#if 0
     EthOffset *eth =dynamic_cast<EthOffset*>(profile->getOffset(Profile::ETH));
     eth->setBuf(&buf);
     eth->extractData();
     eth->format();
     data = eth->getData();
-
+#endif
+    profile->setBuf(buf);
+    data = profile->parze();
     for (qint16 i = 0; i < data->count(); i++)
     {
         targetText += QString("%1 : %2\n").arg(data->value(i).first, -10).arg(data->value(i).second, -20);
