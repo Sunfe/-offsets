@@ -12,7 +12,7 @@
 #define GLOB_FRAME_TYPE_LEN     (2)
 
 #define GLOB_FRAME_MAX_LEN      (1356)
-
+#define GLB_IP_ADDR_BYTE_LEN    (4)
 #define GLOB_PROTOCAL_IP        (0x0800)
 
 

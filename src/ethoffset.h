@@ -21,6 +21,8 @@ public:
     void insertOffset8023qTag();
 
     virtual QString format();
+    QString formatMacAddress(QString src);
+    QString formatIpAddress(QString src);
     virtual void extractData();
 private:
     bool isTagged;     /* conformed with ieee802.1q */

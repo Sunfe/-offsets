@@ -28,6 +28,8 @@ MOC_DIR = build
 UI_DIR = build
 SOURCES += \
         src/element.cpp \
+        src/ethoffset.cpp \
+        src/fppoffset.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
         src/offset.cpp \
@@ -36,6 +38,8 @@ SOURCES += \
 
 HEADERS += \
         src/element.h \
+        src/ethoffset.h \
+        src/fppoffset.h \
         src/global.h \
         src/mainwindow.h \
         src/offset.h \

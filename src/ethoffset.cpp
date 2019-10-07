@@ -219,23 +219,50 @@ QString EthOffset::format()
 
         if((name.toLower() == "src mac") || (name.toLower() == "des mac"))
         {
-            QString mac;
-            /* 每个Byte两个字母 */
-            for(qint8 j = 0; j < GLB_MAC_BYTE_LEN * 2; j += 2)
-            {
-                mac += origData.mid(j, 2) + "-";
-            }
-            /* 去掉末尾多余的'-'*/
-            mac.remove( QRegExp("-$"));
+            QString mac = formatMacAddress(origData);
             d_data->replace(i, qMakePair(name, mac));
         }
-        else
+        else if ((name.toLower() == "source address") || (name.toLower() == "destination address"))
         {
-            d_data->replace(i, qMakePair(name, origData.insert(0,"0x")));
+            QString ip = formatIpAddress(origData);
+            d_data->replace(i, qMakePair(name, ip));
         }
     }
 
     return data.toUpper();
+}
+
+
+QString EthOffset::formatMacAddress(QString src)
+{
+    QString mac;
+    /* 每个Byte两个字母 */
+    for(qint8 i = 0; i < GLB_MAC_BYTE_LEN * 2; i += 2)
+    {
+        mac += src.mid(i, 2) + "-";
+    }
+    /* 去掉末尾多余的'-'*/
+    mac.remove( QRegExp("-$"));
+    return mac;
+}
+
+QString EthOffset::formatIpAddress(QString src)
+{
+    QString ip;
+    /* 每个Byte两个16进制字母 */
+    for(qint8 i = 0; i < GLB_IP_ADDR_BYTE_LEN * 2; i += 2)
+    {
+        QString dtStr  = src.mid(i, 2);
+        if (dtStr.isEmpty())
+            continue;
+
+        bool ok = false;
+        qint32 decimal = dtStr.toInt(&ok, 16);
+        ip += QString::number(decimal, 10) + ".";
+    }
+    /* 去掉末尾多余的'.'*/
+    ip.remove( QRegExp(".$"));
+    return ip;
 }
 
 void EthOffset::extractData()

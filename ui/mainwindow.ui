@@ -34,23 +34,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QToolButton" name="btnParse">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>180</y>
-      <width>31</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>...</string>
-    </property>
-    <property name="icon">
-     <iconset resource="../offset.qrc">
-      <normaloff>:/offsets/images/arrow_right.png</normaloff>:/offsets/images/arrow_right.png</iconset>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnSetting">
     <property name="geometry">
      <rect>
@@ -75,32 +58,6 @@
     </property>
     <property name="text">
      <string>以太网报文</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioBtnIp">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>20</y>
-      <width>63</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>IP报文</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioBtnUdp">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>20</y>
-      <width>79</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>UDP报文</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioBtnMetaframe">
@@ -128,9 +85,7 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="../offset.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>btnSetting</sender>
@@ -173,38 +128,6 @@
     <hint type="sourcelabel">
      <x>472</x>
      <y>42</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>326</x>
-     <y>240</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioBtnUdp</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onRadioBtnClick(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>359</x>
-     <y>44</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>326</x>
-     <y>240</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioBtnIp</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onRadioBtnClick(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>261</x>
-     <y>44</y>
     </hint>
     <hint type="destinationlabel">
      <x>326</x>
